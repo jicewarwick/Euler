@@ -7,6 +7,19 @@
  *
  * How many composite integers, n < 10^8, have precisely two, not necessarily
  * distinct, prime factors?
+ *
+ * Firstly, I generate a vector of primes up to MAX / 2, then, searching the
+ * minimum number for each i in the prime vector such that the product is less
+ * than MAX. using the offsetting difference to infer the number of Semiprime
+ * given i.
+ *
+ * A little tweak is used to decrease the computational time. middle is created
+ * as a reference point as i do not need to exceeds middle and j cannot be below
+ * that value.
+ *
+ * Although this works, it takes ridiculously long (about 2'41"). A much faster
+ * method such as sieving can be used. Several method can be found in the forum.
+ *
  */
 
 #include <iostream>
@@ -15,23 +28,23 @@
 
 using namespace std;
 
-void fillPrime(vector<long long>&, long long);
+long long fillPrime(vector<long long>&, long long);
 
 int main(int argc, const char *argv[])
 {
-	long long numSemiPrime = 0;
 	vector<long long> prime;
 	const long long MAX = 1e8;
-	fillPrime(prime, MAX / 2);
+	long long middle;
+	middle = fillPrime(prime, MAX / 2);
 	long long size = prime.size();
+	long long numSemiPrime = size;
+	cout << "The length of all prime under " << MAX/2 << " is " << size << endl;
+	cout << "The middle reference point: " << middle << endl;
 
-	for (vector<long long>::iterator it = prime.begin(); it != prime.end(); it++) {
-		for (vector<long long>::iterator jt = prime.begin() size - size / *it; jt != prime.end(); jt++) {
-			//cout << *it << '\t' << *jt << endl;
+	for (vector<long long>::iterator it = prime.begin() + 1; it != prime.begin() + middle; it++) {
+		for (vector<long long>::iterator jt = prime.begin() + middle - 1; jt != prime.end(); jt++) {
 			if (*it * *jt > MAX) {
-				numSemiPrime += 
-				//cout << *it << '\t' << *jt << endl;
-			} else {
+				numSemiPrime += jt - it;
 				break;
 			}
 		}
@@ -42,13 +55,19 @@ int main(int argc, const char *argv[])
 	return 0;
 }
 
-void fillPrime(vector<long long> &prime, long long n){
-	for (long long i = 2; i <= n; i++) {
+long long fillPrime(vector<long long> &prime, long long n){
+	long long middle = sqrt(2 * n);
+	for (long long i = 2; i <= middle; i++) {
 		if (isPrime(i)) {
 			prime.push_back(i);
-			//cout << i << '\t';
 		}
 	}
-	//cout << endl;
+	long long ret = prime.size();
+	for (long long i = middle + 1; i <= n; i++) {
+		if (isPrime(i)) {
+			prime.push_back(i);
+		}
+	}
+	return ret;
 }
 
