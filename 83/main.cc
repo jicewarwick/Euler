@@ -57,6 +57,7 @@ int main(int argc, const char *argv[])
 		}
 		i++;
 	}
+	data.close();
 
 	
 	// initialise the distance matrix
