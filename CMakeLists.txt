@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Euler)
 #set(CMAKE_CXX_FLAGS "-g -Wall")
-set(CMAKE_CXX_FLAGS "-g")
+set(CMAKE_CXX_FLAGS "-g -std=c++11")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${Euler_SOURCE_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${Euler_SOURCE_DIR}/lib)
@@ -12,6 +12,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${Euler_SOURCE_DIR}/bin)
 #add_subdirectory(20)
 #add_subdirectory(25)
 #add_subdirectory(107)
+#add_subdirectory(34)
 
 # Done and doings
 add_subdirectory(libmath)
@@ -33,4 +34,5 @@ add_subdirectory(libmath)
 #add_subdirectory(83)
 #add_subdirectory(187)
 #add_subdirectory(31)
-add_subdirectory(13)
+#add_subdirectory(13)
+add_subdirectory(136)

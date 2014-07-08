@@ -12,39 +12,43 @@ Tree::Tree(int** input, int n){
 	size_ = n;
 	data_ = input;
 	genMinTree();
-
 }
 
 Tree::~Tree(){
 	size_ = -1;
+	for (int i = 0; i < size_; ++i) {
+		delete[] data_[i];
+		delete[] minTree_[i];
+	}
+	delete[] data_;
+	delete[] minTree_;
 	data_ = NULL;
 	minTree_ = NULL;
 }
 
 void Tree::genMinTree(){
-	// initialise minTree_
+	// initialise minTree_ and tmp matrix
 	minTree_ = new int*[size_];
 	int** tmp = new int*[size_];
 	for (int i = 0; i < size_; ++i) {
 		minTree_[i] = new int[size_]();
 		tmp[i] = new int[size_];
-		for (int j = 0; j < size_; ++j) {
+		// the first row is not needed as the algorithm start from the
+		// first row
+		for (int j = 1; j < size_; ++j) {
 			tmp[i][j] = data_[i][j];
 		}
 	}
-		for (int i = 0; i < size_; ++i) {
-			tmp[i][0] = 0;
-		}
-
 	
+	// accepted vector stores the nodes that has been visited
 	vector<int> accepted;
 	accepted.push_back(0);
 	int x, y, loop_x;
-	for (int l = size_; l > 1; --l) {
+	for (int l = size_; l > 0; --l) {
 		int min = INT_MAX;
 		for (int i = 0; i < accepted.size(); ++i) {
 			loop_x = accepted[i];
-			for (int j = 0; j < size_; ++j) {
+			for (int j = 1; j < size_; ++j) {
 				if (tmp[loop_x][j] != 0 && min > tmp[loop_x][j]) {
 					min = tmp[loop_x][j];
 					x = loop_x;

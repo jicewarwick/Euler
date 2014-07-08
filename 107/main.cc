@@ -11,6 +11,8 @@
 #include <vector>
 #include "Tree.h"
 
+#define INPUT "net"
+
 using namespace std;
 
 int main(int argc, char const *argv[])
@@ -23,7 +25,8 @@ int main(int argc, char const *argv[])
 	dash << "-";
 	
 	// read in the file as a matrix
-	ifstream input("network.txt");
+	ifstream input(INPUT);
+	//ifstream input("network.txt");
 	if (!input.is_open()) {
 		cout << "IO ERROR!!!" << endl;
 		return 1;
@@ -66,12 +69,12 @@ int main(int argc, char const *argv[])
 	Tree map(data, size);
 	int total_distance = map.initialDistance();
 	int min_distance = map.minDistance();
-	cout << total_distance << endl;
+	cout << "The total distance of the map: " << total_distance << endl;
 	//map.printTree();
-	cout << min_distance << endl;
+	cout << "The minimum tree is of size: " << min_distance << endl;
 	map.printMinTree();
-	
-	
+	cout << "Total saving: " << total_distance - min_distance << endl;
+	map.~Tree();
 	
 	return 0;
 }

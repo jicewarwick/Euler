@@ -1,5 +1,5 @@
-#ifndef PRIME_97KMIIND
-#define PRIME_97KMIIND
+#ifndef NUMBERTHEORY_H_RWX6XLHN
+#define NUMBERTHEORY_H_RWX6XLHN
  
 #include <cmath>
 #include <iostream>
@@ -31,4 +31,4 @@ bool isDeficient(int);
 // A number is abundant if the sum of all its proper divisors is grater than this number
 bool isAbundant(int);
 
-#endif /* end of include guard: PRIME_97KMIIND */
+#endif /* end of include guard: NUMBERTHEORY_H_RWX6XLHN */
